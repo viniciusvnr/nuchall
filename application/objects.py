@@ -8,11 +8,14 @@ acc = [{
                 "String"
                 ]
 }]
+
 transaction = {
     "merchant": "String",
     "amount": "Number",
     "time": "String"
 }
+
+transactions = []
 
 # `LastTransactions` [ <Transaction> ]
 
