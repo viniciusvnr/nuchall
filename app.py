@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, escape, request, make_response, abort
-from application.objects import acc, transaction, transactions
+from application.objects import acc, transaction
 from datetime import datetime
-
 
 app = Flask(__name__)
 
@@ -24,12 +23,16 @@ def account():
         if not request.json:
             abort(400)
 
+        if len(acc) == 0:
+            abort(404)
+
         new_acc = {
-                "account_id": acc[-1]['account_id'] + 1,
-                "cardIsActive": request.json["cardIsActive"],
-                "limit": request.json["limit"],
-                "denylist": request.json["denylist"]
-                }
+            "account_id": acc[-1]['account_id'] + 1,
+            "cardIsActive": request.json["cardIsActive"],
+            "limit": request.json["limit"],
+            "denylist": request.json["denylist"]
+        }
+
         acc.append(new_acc)
         return jsonify({"account": new_acc}), 201
 
@@ -42,7 +45,7 @@ def get_account(account_id):
     return jsonify({"account": account[0]})
 
 
-@app.route(api_version + '/authorize' , methods=['POST'])
+@app.route(api_version + '/authorize', methods=['POST'])
 def authorize():
     date_time = datetime.utcnow()
     tr_date = date_time.strftime('%Y-%m-%d %H:%M:%S')
@@ -51,18 +54,18 @@ def authorize():
         "merchant": request.json["merchant"],
         "amount": request.json["amount"],
         "time": tr_date
-        }]
+    }]
 
-    transactions.append(tr)
+    transaction.append(tr)
 
     return jsonify({"transactions": tr}), 201
 
 
 @app.route(api_version + '/transactions')
 def get_transactions():
-    if len(transactions) == 0:
+    if len(transaction) == 0:
         abort(404)
-    return jsonify({"transactions": transactions})
+    return jsonify({"transactions": transaction})
 
 
 @app.route(api_version + '/healthcheck')

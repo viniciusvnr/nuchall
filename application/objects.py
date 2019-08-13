@@ -1,6 +1,7 @@
 # Initial objects
-
-acc = [{
+"""
+# acc
+{
     "account_id": 1,
     "cardIsActive": False,
     "limit": 1500.8,
@@ -9,13 +10,17 @@ acc = [{
                 ]
 }]
 
-transaction = {
+#  transaction
+{
     "merchant": "String",
     "amount": "Number",
     "time": "String"
 }
+"""
 
-transactions = []
+acc = []
+
+transaction = []
 
 # `LastTransactions` [ <Transaction> ]
 
