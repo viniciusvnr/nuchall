@@ -34,7 +34,7 @@ def account():
         return jsonify({"account": new_acc}), 201
 
 
-@app.route(api_version + "/account/<int:account_id>")
+@app.route(api_version + '/account/<int:account_id>')
 def get_account(account_id):
     account = [ac for ac in acc if ac["account_id"] == account_id]
     if len(account) == 0:
@@ -42,7 +42,7 @@ def get_account(account_id):
     return jsonify({"account": account[0]})
 
 
-@app.route(api_version + "/authorize", methods=['POST'])
+@app.route(api_version + '/authorize' , methods=['POST'])
 def authorize():
     date_time = datetime.utcnow()
     tr_date = date_time.strftime('%Y-%m-%d %H:%M:%S')
@@ -58,11 +58,16 @@ def authorize():
     return jsonify({"transactions": tr}), 201
 
 
-@app.route(api_version + "/transactions")
+@app.route(api_version + '/transactions')
 def get_transactions():
     if len(transactions) == 0:
         abort(404)
     return jsonify({"transactions": transactions})
+
+
+@app.route(api_version + '/healthcheck')
+def healthcheck():
+    return jsonify({"healthy": True})
 
 
 @app.errorhandler(404)
