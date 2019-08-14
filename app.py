@@ -6,8 +6,8 @@ from resources.Authorize import *
 from resources.ApiVersion import GetVersion
 from resources.healthcheck import HealthCheck
 
-
-api_bp = Blueprint('api', __name__)
+api_version = 'v1.0'
+api_bp = Blueprint('api', __name__, url_prefix='/api/' + api_version)
 api = Api(api_bp)
 
 # Routes

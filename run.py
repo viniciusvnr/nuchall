@@ -1,6 +1,6 @@
 from flask import Flask
-from Model.Model import db
 from app import api_bp
+from Model.Model import db
 from app_config import config
 
 
@@ -8,8 +8,8 @@ def create_app(config_filename):
 
     app = Flask(__name__)
     app.config.from_object(config_filename)
-    app.register_blueprint(api_bp, url_prefix='/api')
-# Initialize database (sqlite)
+    app.register_blueprint(api_bp)
+    # Initialize database (sqlite)
     db.init_app(app)
 
     return app
