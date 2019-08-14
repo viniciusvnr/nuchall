@@ -12,7 +12,7 @@
 | GET | /api/v1.0/account/transaction | retrieve a list of transactions of a specified account |
 | GET | /api/v1.0/account/transaction/tid | retrieve a transactions of a specified account |
 | GET | /api/v1.0/merchant | Retrieve a list of merchant |
-| GET | /api/v1.0/merchant/merchantid | Retrieve a list of merchant |
+| GET | /api/v1.0/merchant/merchantid | Retrieve a merchant |
 | POST | /api/v1.0/merchant | create a merchant |
 | POST | /api/v1.0/authorize | authorize a transaction |
 | GET | /api/v1.0/healthcheck | return application status |
