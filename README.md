@@ -22,7 +22,7 @@
 `account`
 ```json
  {
-    "cardIsActive": "Boolean",
+    "cardIsActive": true,
      "limit": "Number",
      "denylist": [ "String" ]
 }
@@ -57,6 +57,7 @@
 ```json
 {
   "merchantid": "guid",
-  "name"
+  "name" : "string",
+  "enabled": true
 }
 ```
