@@ -10,13 +10,14 @@
 | GET | /api/v1.0/account/accountid | Retrieve a account |
 | POST | /api/v1.0/account | create an account |
 | GET | /api/v1.0/account/transaction | retrieve a list of transactions of a specified account |
+| GET | /api/v1.0/account/transaction/tid | retrieve a transactions of a specified account |
 | GET | /api/v1.0/merchant | Retrieve a list of merchant |
 | GET | /api/v1.0/merchant/merchantid | Retrieve a list of merchant |
 | POST | /api/v1.0/merchant | create a merchant |
 | POST | /api/v1.0/authorize | authorize a transaction |
 | GET | /api/v1.0/healthcheck | return application status |
 
-## schema
+## default schema
 
 `account`
 ```json
@@ -47,5 +48,15 @@
 ```json
 {
     "approved": "Boolean", "newLimit": "Number", "deniedReasons": [ "String" ]
+}
+```
+
+## schema
+
+`merchant`
+```json
+{
+  "merchantid": "guid",
+  "name"
 }
 ```
