@@ -67,6 +67,7 @@
 - 5 - denied by limit
 - 6 - denied by transaction limit (10)
 - 7 - denied by blocked card
+- 8 - denied by time limit
 
 ## default schema
 
