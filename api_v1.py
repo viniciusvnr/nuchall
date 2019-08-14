@@ -20,6 +20,3 @@ api.add_resource(Merchant, '/merchant')
 api.add_resource(GetMerchantById, '/merchant/<merchandid>')
 api.add_resource(Authorize, '/authorize')
 api.add_resource(HealthCheck, '/healthcheck')
-
-
-
