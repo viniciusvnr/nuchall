@@ -58,14 +58,15 @@
 }
 ```
 
-status
-1 - authorized
-2 - not authorized
-3 - denied by merchant denylist
-4 - denied by account limit (90%)
-5 - denied by limit
-6 - denied by transaction limit (10)
-7 - denied by blocked card
+### transaction status
+
+- 1 - authorized
+- 2 - not authorized
+- 3 - denied by merchant denylist
+- 4 -  denied by account limit (90%)
+- 5 - denied by limit
+- 6 - denied by transaction limit (10)
+- 7 - denied by blocked card
 
 ## default schema
 
