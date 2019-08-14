@@ -19,12 +19,14 @@ class AccountById(Resource):
 
 class GetTransactions(Resource):
 
-    def get(self):
+    def get(self, accountid):
+        self.accountid = accountid
         return {"message": "List transactions"}
 
 
 class GetTransactionById(Resource):
 
-    def get(self, tid):
+    def get(self, accountid, tid):
+        self.accountid = accountid
         self.tid = tid
         return {"message": "List transaction by tid {}".format(self.tid)}
