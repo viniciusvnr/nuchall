@@ -10,7 +10,7 @@ api_version = 'v1.0'
 api_bp_v1 = Blueprint('api', __name__, url_prefix='/api/' + api_version)
 api = Api(api_bp_v1)
 
-# Routes
+# Api Routes
 api.add_resource(GetVersion, '/version')
 api.add_resource(Account, '/account')
 api.add_resource(AccountById, '/account/<accountid>')
