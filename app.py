@@ -4,7 +4,7 @@ from resources.Account import *
 from resources.Merchant import *
 from resources.Authorize import *
 from resources.ApiVersion import GetVersion
-from resources.healthcheck import HealthCheck
+from resources.Healthcheck import HealthCheck
 
 api_version = 'v1.0'
 api_bp = Blueprint('api', __name__, url_prefix='/api/' + api_version)
