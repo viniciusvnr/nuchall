@@ -17,6 +17,17 @@
 | POST | /api/v1.0/authorize | authorize a transaction |
 | GET | /api/v1.0/healthcheck | return application status |
 
+## schema
+
+`merchant`
+```json
+{
+  "merchantid": "guid",
+  "name" : "string",
+  "enabled": true
+}
+```
+
 ## default schema
 
 `account`
@@ -48,16 +59,5 @@
 ```json
 {
     "approved": "Boolean", "newLimit": "Number", "deniedReasons": [ "String" ]
-}
-```
-
-## schema
-
-`merchant`
-```json
-{
-  "merchantid": "guid",
-  "name" : "string",
-  "enabled": true
 }
 ```
