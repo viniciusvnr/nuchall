@@ -45,13 +45,3 @@ output:
                      "String"
                      ]
 }
-
-
-Endpoints:
-
-/merchant
-/authorize
-/account
-/account/transactions
-
-/healthcheck
