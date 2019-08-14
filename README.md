@@ -39,7 +39,7 @@
 `LastTransactions`
 ```json
 {
-  "lasttransactions": [<transactions>]
+  "lasttransactions": [<transaction>]
 }
 ```
 
