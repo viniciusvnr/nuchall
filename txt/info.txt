@@ -1,3 +1,14 @@
+Implement an API that authorizes a transaction for a specific account, following some
+predefined rules.
+
+Input
+You'll receive as input: the account data (card status and current available limit), latest approved
+transactions and the current transaction to be approved.
+
+Output
+The output should consist of whether the transaction was authorized or not, the updated
+available limit and, when relevant, all of the reasons why the transaction was denied.
+
 Rules:
 1. The transaction amount should not be above limit
 2. No transaction should be approved when the card is blocked

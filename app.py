@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, escape, request, make_response, abort
 from application.objects import acc, transaction
 from datetime import datetime
+import logging as logger
 
 app = Flask(__name__)
 
@@ -77,6 +78,7 @@ def healthcheck():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
-
+logger.basicConfig(level="DEBUG")
 if __name__ == "__main__":
+    logger.debug("Starting application")
     app.run(debug=True, host='0.0.0.0')
