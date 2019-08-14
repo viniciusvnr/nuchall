@@ -1,84 +1,25 @@
-from flask import Flask, jsonify, escape, request, make_response, abort
-from application.objects import acc, transaction
-from datetime import datetime
-import logging as logger
-
-app = Flask(__name__)
-
-api_version = '/api/v1.0'
-
-
-@app.route("/api")
-def get_version():
-    return 'nuchall - Beta API - v1.0'
+from flask import Blueprint
+from flask_restful import Api
+from resources.Account import *
+from resources.Merchant import *
+from resources.Authorize import *
+from resources.ApiVersion import GetVersion
+from resources.healthcheck import HealthCheck
 
 
-@app.route(api_version + '/account', methods=['GET', 'POST'])
-def account():
-    if request.method == 'GET':
-        if len(acc) == 0:
-            abort(404)
-        return jsonify({"accounts": acc})
+api_bp = Blueprint('api', __name__)
+api = Api(api_bp)
 
-    if request.method == 'POST':
-        if not request.json:
-            abort(400)
-
-        if len(acc) == 0:
-            abort(404)
-
-        new_acc = {
-            "account_id": acc[-1]['account_id'] + 1,
-            "cardIsActive": request.json["cardIsActive"],
-            "limit": request.json["limit"],
-            "denylist": request.json["denylist"]
-        }
-
-        acc.append(new_acc)
-        return jsonify({"account": new_acc}), 201
+# Routes
+api.add_resource(GetVersion, '/version')
+api.add_resource(Account, '/account')
+api.add_resource(AccountById, '/account/<id>')
+api.add_resource(GetTransactionById, '/account/transaction')
+api.add_resource(GetTransactions, '/account/transaction/<tid>')
+api.add_resource(Merchant, '/merchant')
+api.add_resource(GetMerchantById, '/merchant/<merchandid>')
+api.add_resource(Authorize, '/authorize')
+api.add_resource(HealthCheck, '/healthcheck')
 
 
-@app.route(api_version + '/account/<int:account_id>')
-def get_account(account_id):
-    account = [ac for ac in acc if ac["account_id"] == account_id]
-    if len(account) == 0:
-        abort(404)
-    return jsonify({"account": account[0]})
 
-
-@app.route(api_version + '/authorize', methods=['POST'])
-def authorize():
-    date_time = datetime.utcnow()
-    tr_date = date_time.strftime('%Y-%m-%d %H:%M:%S')
-
-    tr = [{
-        "merchant": request.json["merchant"],
-        "amount": request.json["amount"],
-        "time": tr_date
-    }]
-
-    transaction.append(tr)
-
-    return jsonify({"transactions": tr}), 201
-
-
-@app.route(api_version + '/transactions')
-def get_transactions():
-    if len(transaction) == 0:
-        abort(404)
-    return jsonify({"transactions": transaction})
-
-
-@app.route(api_version + '/healthcheck')
-def healthcheck():
-    return jsonify({"healthy": True})
-
-
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
-logger.basicConfig(level="DEBUG")
-if __name__ == "__main__":
-    logger.debug("Starting application")
-    app.run(debug=True, host='0.0.0.0')

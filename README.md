@@ -6,16 +6,17 @@
 
 | HTTP Method | URI | Action|
 |------------ |-----|-------|
-| GET | /api/v1.0/account | Retrieve a list of accounts  |
-| GET | /api/v1.0/account/accountid | Retrieve a account |
-| POST | /api/v1.0/account | create an account |
-| GET | /api/v1.0/account/transaction | retrieve a list of transactions of a specified account |
-| GET | /api/v1.0/account/transaction/tid | retrieve a transactions of a specified account |
-| GET | /api/v1.0/merchant | Retrieve a list of merchant |
-| GET | /api/v1.0/merchant/merchantid | Retrieve a merchant |
-| POST | /api/v1.0/merchant | create a merchant |
-| POST | /api/v1.0/authorize | authorize a transaction |
-| GET | /api/v1.0/healthcheck | return application status |
+| GET | /api/version | Retrieve api version  |
+| GET | /api/account | Retrieve a list of accounts  |
+| GET | /api/account/{accountid} | Retrieve a account |
+| POST | /api/account | create an account |
+| GET | /api/account/transaction | retrieve a list of transactions of a specified account |
+| GET | /api/account/transaction/{tid} | retrieve a transaction of a specified account |
+| GET | /api/merchant | Retrieve a list of merchant |
+| GET | /api/merchant/{merchantid} | Retrieve a merchant |
+| POST | /api/merchant | create a merchant |
+| POST | /api/authorize | authorize a transaction |
+| GET | /api/healthcheck | return application status |
 
 ## schema
 
