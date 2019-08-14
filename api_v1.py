@@ -7,8 +7,8 @@ from resources.ApiVersion import GetVersion
 from resources.Healthcheck import HealthCheck
 
 api_version = 'v1.0'
-api_bp = Blueprint('api', __name__, url_prefix='/api/' + api_version)
-api = Api(api_bp)
+api_bp_v1 = Blueprint('api', __name__, url_prefix='/api/' + api_version)
+api = Api(api_bp_v1)
 
 # Routes
 api.add_resource(GetVersion, '/version')
