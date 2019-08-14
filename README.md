@@ -19,14 +19,53 @@
 
 ## schema
 
+`account`
+```json
+ {
+    "accountid": "guid",
+    "cardIsActive": true,
+     "limit": "Number",
+     "denylist": [ "merchantid" ]
+}
+```
+
 `merchant`
 ```json
 {
   "merchantid": "guid",
-  "name" : "string",
+  "name": "string",
   "enabled": true
 }
 ```
+
+`authorize transaction - request`
+```json
+{
+    "accountid": "accountid",
+    "merchant": "String",
+     "amount": "Number"
+}
+```
+
+`authorize transaction - response`
+```json
+{
+    "accountid": "accountid",
+    "merchant": "String",
+     "amount": "Number",
+     "time": "String",
+     "status": 1
+}
+```
+
+status
+1 - authorized
+2 - not authorized
+3 - denied by merchant denylist
+4 - denied by account limit (90%)
+5 - denied by limit
+6 - denied by transaction limit (10)
+7 - denied by blocked card
 
 ## default schema
 
