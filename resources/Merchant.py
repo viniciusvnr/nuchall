@@ -7,7 +7,7 @@ class Merchant(Resource):
         return {"message": "List merchants"}
 
     def post(self):
-        return {"message": "create new merchant"}
+        return {"message": "create new merchant"}, 201
 
 class GetMerchantById(Resource):
     def get(self, merchandid):

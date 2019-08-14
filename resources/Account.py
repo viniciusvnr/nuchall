@@ -7,7 +7,7 @@ class Account(Resource):
         return {"message": "get account"}
 
     def post(self):
-        return {"message": "create account"}
+        return {"message": "create account"}, 201
 
 
 class AccountById(Resource):
