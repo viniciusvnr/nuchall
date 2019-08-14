@@ -1,6 +1,10 @@
 # nuchall - Beta API - v1.0
 
+## Setup
 
+```sh
+python run.py
+```
 
 ## endpoints
 
