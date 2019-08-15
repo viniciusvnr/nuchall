@@ -1,6 +1,6 @@
 from flask import Flask
 from api_v1 import api_bp_v1
-from Model.Model import db
+from repositories.Model import db
 from app_config import config
 
 

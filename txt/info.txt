@@ -45,5 +45,3 @@ output:
                      "String"
                      ]
 }
-
-1o milestone: montar estrutura da API e o postman, chamar a api usando o postman e conseguir debugar o código
