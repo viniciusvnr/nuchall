@@ -15,7 +15,7 @@ class AccountById(Resource):
 
         self.accountid = accountid
 
-        # TODO:  Chamada pra servico
+        # Chamada pra servico
         # response = accountService.processaChamada(accountid)
 
         # Preparo do retorno
