@@ -8,26 +8,15 @@ python run.py
 
 ## endpoint
 
-| HTTP Method | URI                                 | Action                                                 |
-| ----------- | ----------------------------------- | ------------------------------------------------------ |
-| POST        | /api/v1.0/authorize                 | authorize a transaction                                |
-|             |                                     |                                                        |
-| GET         | /api/v1.0/version                   | Retrieve api version                                   |
-| GET         | /api/v1.0/account                   | Retrieve a list of accounts                            |
-| GET         | /api/v1.0/account/{accountid}       | Retrieve a account                                     |
-| POST        | /api/v1.0/account                   | create an account                                      |
-| GET         | /api/v1.0/account/transaction       | retrieve a list of transactions of a specified account |
-| GET         | /api/v1.0/account/transaction/{tid} | retrieve a transaction of a specified account          |
-| GET         | /api/v1.0/merchant                  | Retrieve a list of merchant                            |
-| GET         | /api/v1.0/merchant/{merchantid}     | Retrieve a merchant                                    |
-| POST        | /api/v1.0/merchant                  | create a merchant                                      |
-| GET         | /api/v1.0/healthcheck               | return application status                              |
+| HTTP Method | URI                   | Action                    |
+| ----------- | --------------------- | ------------------------- |
+| POST        | /api/v1.0/authorize   | authorize a transaction   |
+| GET         | /api/v1.0/healthcheck | return application status |
+| GET         | /api/v1.0             | Retrieve api version      |
 
 ---
 
 ## Authorize a transaction
-
-### Request
 
 ```http
 POST /api/v1.0/authorize
@@ -72,6 +61,38 @@ POST /api/v1.0/authorize
 status: 201 CREATED
 ```
 
+## Api Version
+
+```http
+GET /api/v1.0
+```
+
+```json
+{
+  "version": "nuchall - Beta API - v1.0"
+}
+```
+
+```http
+status: 200 OK
+```
+
+## Healthcheck
+
+```http
+GET /api/v1.0/healthcheck
+```
+
+```json
+{
+  "isHealthy": True
+}
+```
+
+```http
+status: 200 OK
+```
+
 ---
 
 ### default schema
@@ -100,7 +121,7 @@ status: 201 CREATED
 
 ```json
 {
-  "lasttransactions": [<transaction>]
+  "lasttransactions": ["{transaction}"]
 }
 ```
 
