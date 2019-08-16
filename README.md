@@ -85,7 +85,7 @@ GET /api/v1.0/healthcheck
 
 ```json
 {
-  "isHealthy": True
+  "isHealthy": true
 }
 ```
 
@@ -121,7 +121,7 @@ status: 200 OK
 
 ```json
 {
-  "lasttransactions": ["{transaction}"]
+  "lasttransactions": ["{String}"]
 }
 ```
 
