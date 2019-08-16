@@ -30,6 +30,5 @@ class Authorize(Resource):
         if validate.errors:
             return {"error": validate.errors}, 400
         else:
-            # TODO: chamada para o serviço de authorização
             make_authorization = authorize_transaction()
             return make_authorization, 201
