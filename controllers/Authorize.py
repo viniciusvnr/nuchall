@@ -1,5 +1,6 @@
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource
+from services.TransactionAuthorizationService import authorize_transaction
 from marshmallow import Schema, fields
 
 
@@ -30,4 +31,5 @@ class Authorize(Resource):
             return {"error": validate.errors}, 400
         else:
             # TODO: chamada para o serviço de authorização
-            return {"message": "schema validated"}, 201
+            make_authorization = authorize_transaction()
+            return make_authorization, 201

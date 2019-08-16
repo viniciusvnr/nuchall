@@ -1,3 +1,5 @@
+import uuid
+from flask import request
 
 # 1. The transaction amount should not be above limit
 # 2. No transaction should be approved when the card is blocked
@@ -9,3 +11,11 @@
 
 # TODO: tid = uuid
 # uuid.uuid4()
+
+def authorize_transaction():
+    output = {
+              "approved": "Boolean",
+              "newLimit": "Number",
+              "deniedReasons": ["String"]
+             }
+    return output
