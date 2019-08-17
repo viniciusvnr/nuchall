@@ -1,3 +1,7 @@
+
+# TODO: separar as regras em funções ??
+
+
 def validate_rules(input_obj):
     card_is_active = input_obj["account"]["cardIsActive"]
     account_limit = input_obj["account"]["limit"]
