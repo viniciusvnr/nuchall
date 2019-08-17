@@ -2,8 +2,30 @@
 
 ## Setup
 
-```sh
+- console
+  - install requirements
+
+```shell script
+pip install -r requirements.txt
+```
+
+- run application
+
+```shell script
 python run.py
+```
+
+- docker
+  - build image
+
+```shell script
+docker build -t nuchall .
+```
+
+- run container
+
+```shell script
+docker run -p 5000:5000 nuchall
 ```
 
 ## endpoint
