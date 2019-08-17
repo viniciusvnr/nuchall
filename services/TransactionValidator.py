@@ -60,4 +60,3 @@ def validate_rules(input_obj):
             denied_reasons.append({"rule6": "There should not be more than 3 transactions on a 2 minutes interval"})
 
     return denied_reasons
-
