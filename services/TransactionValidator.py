@@ -1,21 +1,3 @@
-from datetime import datetime
-# Rules
-# 1. The transaction amount should not be above limit
-# 2. No transaction should be approved when the card is blocked
-# 3. The first transaction shouldn't be above 90% of the limit
-# 4. There should not be more than 10 transactions on the same merchant
-# 5. Merchant deny list
-# 6. There should not be more than 3 transactions on a 2 minutes interval
-
-"""
-output = {
-              "approved": "Boolean",
-              "newLimit": "Number",
-              "deniedReasons": ["String"],
-             }
-"""
-
-
 def validate_rules(input_obj):
     card_is_active = input_obj["account"]["cardIsActive"]
     account_limit = input_obj["account"]["limit"]
@@ -26,15 +8,19 @@ def validate_rules(input_obj):
     transaction_time = input_obj["transaction"]["time"]
     denied_reasons = []
 
+    # 1. The transaction amount should not be above limit
     if transaction_amount > account_limit:
         denied_reasons.append({"rule1": "The transaction amount should not be above limit"})
 
+    # 2. No transaction should be approved when the card is blocked
     if not card_is_active:
         denied_reasons.append({"rule2": "No transaction should be approved when the card is blocked"})
 
+    # 3. The first transaction shouldn't be above 90% of the limit
     if transaction_amount >= (account_limit * 0.9) and len(last_transactions) == 0:
         denied_reasons.append({"rule3": "The first transaction shouldn't be above 90% of the limit"})
 
+    # 4. There should not be more than 10 transactions on the same merchant
     if last_transactions:
         count = 0
 
@@ -45,9 +31,11 @@ def validate_rules(input_obj):
         if count >= 10:
             denied_reasons.append({"rule4": "There should not be more than 10 transactions on the same merchant"})
 
+    # 5. Merchant deny list
     if transaction_merchant in deny_list:
         denied_reasons.append({"rule5": "Merchant in deny list"})
 
+    # 6. There should not be more than 3 transactions on a 2 minutes interval
     if len(last_transactions) >= 3:
         count = 0
 
