@@ -62,7 +62,8 @@ POST /api/v1.0/authorize
   "lasttransactions": [
     {
       "merchant": "String",
-      "amount": "Number"
+      "amount": "Number",
+      "time": "string" // 2019-08-17T11:02:00.000000
     }
   ],
   "transaction": {
