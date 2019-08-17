@@ -79,7 +79,11 @@ POST /api/v1.0/authorize
 {
   "approved": "Boolean",
   "newLimit": "Number",
-  "deniedReasons": ["String"]
+  "deniedReasons": [
+    {
+      "rule": "description of rule"
+    }
+  ]
 }
 ```
 
