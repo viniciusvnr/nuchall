@@ -1,4 +1,4 @@
-
+from datetime import datetime
 # Rules
 # 1. The transaction amount should not be above limit
 # 2. No transaction should be approved when the card is blocked
@@ -49,14 +49,22 @@ def validate_rules(input_obj):
         denied_reasons.append({"rule5": "Merchant in deny list"})
 
     if len(latest_transactions) >= 3:
-        rule6_count = 0
-        for transaction in latest_transactions:
-            dt1 = transaction["time"].minute
-            dt2 = transaction_time.minute
+        count = 0
+
+        for i, trn in enumerate(latest_transactions):
+            # timestamp da transacao da lista <latest_transactions>
+            dt1 = trn["time"].timestamp()
+            # timestamp da transacao do payload
+            dt2 = transaction_time.timestamp()
+            # timestamp do proximo item da lista <latest_transactions>
+            dt2_inner = latest_transactions[(i + 1) % len(latest_transactions)]["time"].timestamp()
             dt_delta = dt2 - dt1
-            if dt_delta < 2:
-                rule6_count += 1
-        if rule6_count >= 3:
+            dt_inner_delta = dt2_inner - dt1
+
+            if dt_delta < 120.0 or dt_inner_delta < 120.0:
+                count += 1
+
+        if count >= 3:
             denied_reasons.append({"rule6": "There should not be more than 3 transactions on a 2 minutes interval"})
 
     return denied_reasons
