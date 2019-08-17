@@ -52,7 +52,7 @@ POST /api/v1.0/authorize
 
 ### `Payload`
 
-```json
+```jsonc
 {
   "account": {
     "cardIsActive": true,
