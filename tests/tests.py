@@ -1,8 +1,6 @@
-from services.TransactionValidator import validate_rules
-from schemas.AuthorizeSchema import AuthorizeSchema
 import unittest
-import json
-
+from schemas.AuthorizeSchema import AuthorizeSchema
+from services.TransactionValidator import validate_rules
 
 rule_6_expected = [{
     "rule6": "There should not be more than 3 transactions on a 2 minutes interval"
