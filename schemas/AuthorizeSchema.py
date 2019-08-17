@@ -4,6 +4,6 @@ from schemas.TransactionSchema import TransactionSchema
 
 
 class AuthorizeSchema(Schema):
-    account = fields.Nested(AccountSchema)
-    transaction = fields.Nested(TransactionSchema)
-    latesttransaction = fields.UUID(fields.String())
+    account = fields.Nested(AccountSchema, required=True)
+    transaction = fields.Nested(TransactionSchema, required=True)
+    latesttransactions = fields.List(fields.Nested(TransactionSchema), required=True)

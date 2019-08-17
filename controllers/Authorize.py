@@ -11,7 +11,7 @@ class Authorize(Resource):
         input_object = schema.load(request.json)
 
         if input_object.errors:
-            return {"error": input_object.errors}, 400
+            return input_object.errors, 400
         else:
             make_authorization = authorize_transaction(input_object.data)
-            return make_authorization, 201
+            return make_authorization, 200

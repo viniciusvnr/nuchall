@@ -31,7 +31,12 @@ POST /api/v1.0/authorize
     "limit": "Number",
     "denylist": ["merchant"]
   },
-  "latesttransaction": "tid",
+  "lasttransactions": [
+    {
+      "merchant": "String",
+      "amount": "Number"
+    }
+  ],
   "transaction": {
     "merchant": "String",
     "amount": "Number"
@@ -43,16 +48,8 @@ POST /api/v1.0/authorize
 
 ```json
 {
-  "transaction": {
-    "approved": true,
-    "tid": "string",
-    "merchant": "String",
-    "amount": "Number",
-    "time": "String"
-  },
-  "account": {
-    "newLimit": "number"
-  },
+  "approved": "Boolean",
+  "newLimit": "Number",
   "deniedReasons": ["String"]
 }
 ```
@@ -121,7 +118,7 @@ status: 200 OK
 
 ```json
 {
-  "lasttransactions": ["{String}"]
+  "lasttransactions": ["String"]
 }
 ```
 
