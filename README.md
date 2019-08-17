@@ -2,8 +2,9 @@
 
 ## Setup
 
-- console
-  - install requirements
+### Local console
+
+- install requirements
 
 ```shell script
 pip install -r requirements.txt
@@ -15,8 +16,11 @@ pip install -r requirements.txt
 python run.py
 ```
 
-- docker
-  - build image
+---
+
+### Docker
+
+- build image
 
 ```shell script
 docker build -t nuchall .
@@ -27,6 +31,8 @@ docker build -t nuchall .
 ```shell script
 docker run -p 5000:5000 nuchall
 ```
+
+---
 
 ## endpoint
 
