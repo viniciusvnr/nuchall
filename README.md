@@ -57,7 +57,7 @@ POST /api/v1.0/authorize
   "account": {
     "cardIsActive": true,
     "limit": "Number",
-    "denylist": ["merchant"]
+    "denylist": ["string"]
   },
   "lasttransactions": [
     {
@@ -81,7 +81,7 @@ POST /api/v1.0/authorize
   "newLimit": "Number",
   "deniedReasons": [
     {
-      "rule": "description of rule"
+      "reason": "description of rule"
     }
   ]
 }
