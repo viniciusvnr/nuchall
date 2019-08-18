@@ -7,13 +7,15 @@
 - install requirements
 
 ```shell script
-pip install -r requirements.txt
+    python3.7 -m venv /venv \
+    /venv/bin/pip install -U pip \
+    /venv/bin/pip install --no-cache-dir -r /requirements.txt
 ```
 
 - run application
 
 ```shell script
-python3 run.py
+/venv/bin/python3 run.py
 ```
 
 ---
