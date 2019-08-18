@@ -1,5 +1,45 @@
+from datetime import datetime
 
-# TODO: separar as regras em funções ??
+
+def transaction_limit_rule(transaction_amount: float, account_limit: float):
+    return transaction_amount > account_limit
+
+
+def transaction_limit90_rule(transaction_amount: float, account_limit: float):
+    return (account_limit * 0.9) <= transaction_amount < account_limit
+
+
+def transaction_merchant_rule(transaction_list: list):
+    if transaction_list:
+        count = 0
+
+        for trn in transaction_list:
+            if trn["merchant"] == transaction_list:
+                count += 1
+
+        return count >= 10
+
+
+def transaction_deny_list_rule(transaction_merchant: str, deny_list: list):
+    return transaction_merchant in deny_list
+
+
+def transaction_limit_by_interval_rule(transaction_list: list, current_transaction_time: datetime):
+    count = 0
+    for i, trn in enumerate(transaction_list):
+        # timestamp da transacao da lista <latest_transactions>
+        dt1 = trn["time"].timestamp()
+        # timestamp da transacao do payload
+        dt2 = current_transaction_time.timestamp()
+        # timestamp do proximo item da lista <latest_transactions>
+        dt2_inner = transaction_list[(i + 1) % len(transaction_list)]["time"].timestamp()
+        dt_delta = dt2 - dt1
+        dt_inner_delta = dt2_inner - dt1
+
+        if dt_delta < 120.0 or dt_inner_delta < 120.0:
+            count += 1
+
+    return count >= 3
 
 
 def validate_rules(input_obj):
@@ -12,51 +52,38 @@ def validate_rules(input_obj):
     transaction_time = input_obj["transaction"]["time"]
     denied_reasons = []
 
-    # 1. The transaction amount should not be above limit
-    if transaction_amount > account_limit:
-        denied_reasons.append({"rule1": "The transaction amount should not be above limit"})
+    # call functions
+    limit_rule = transaction_limit_rule(transaction_amount, account_limit)
+    merchant_rule = transaction_merchant_rule(last_transactions)
+    deny_list_rule = transaction_deny_list_rule(transaction_merchant, deny_list)
 
-    # 2. No transaction should be approved when the card is blocked
+    if limit_rule:
+        # rule 1.
+        denied_reasons.append({"reason": "The transaction amount should not be above limit"})
+
     if not card_is_active:
-        denied_reasons.append({"rule2": "No transaction should be approved when the card is blocked"})
+        # rule 2.
+        denied_reasons.append({"reason": "No transaction should be approved when the card is blocked"})
 
-    # 3. The first transaction shouldn't be above 90% of the limit
-    if transaction_amount >= (account_limit * 0.9) and len(last_transactions) == 0:
-        denied_reasons.append({"rule3": "The first transaction shouldn't be above 90% of the limit"})
+    if len(last_transactions) == 0:
+        limit_90_rule = transaction_limit90_rule(transaction_amount, account_limit)
+        if limit_90_rule:
+            # rule 3.
+            denied_reasons.append({"reason": "The first transaction shouldn't be above 90% of the limit"})
 
-    # 4. There should not be more than 10 transactions on the same merchant
-    if last_transactions:
-        count = 0
+    if merchant_rule:
+        # rule 4.
+        denied_reasons.append({"reason": "There should not be more than 10 transactions on the same merchant"})
 
-        for trn in last_transactions:
-            if trn["merchant"] == transaction_merchant:
-                count += 1
+    if deny_list_rule:
+        # rule 5
+        denied_reasons.append({"reason": "Merchant in deny list"})
 
-        if count >= 10:
-            denied_reasons.append({"rule4": "There should not be more than 10 transactions on the same merchant"})
+        if len(last_transactions) >= 3:
+            limit_by_interval_rule = transaction_limit_by_interval_rule(last_transactions, transaction_time)
 
-    # 5. Merchant deny list
-    if transaction_merchant in deny_list:
-        denied_reasons.append({"rule5": "Merchant in deny list"})
-
-    # 6. There should not be more than 3 transactions on a 2 minutes interval
-    if len(last_transactions) >= 3:
-        count = 0
-
-        for i, trn in enumerate(last_transactions):
-            # timestamp da transacao da lista <latest_transactions>
-            dt1 = trn["time"].timestamp()
-            # timestamp da transacao do payload
-            dt2 = transaction_time.timestamp()
-            # timestamp do proximo item da lista <latest_transactions>
-            dt2_inner = last_transactions[(i + 1) % len(last_transactions)]["time"].timestamp()
-            dt_delta = dt2 - dt1
-            dt_inner_delta = dt2_inner - dt1
-
-            if dt_delta < 120.0 or dt_inner_delta < 120.0:
-                count += 1
-
-        if count >= 3:
-            denied_reasons.append({"rule6": "There should not be more than 3 transactions on a 2 minutes interval"})
+            if limit_by_interval_rule:
+                # rule 6
+                denied_reasons.append({"reason": "There should not be more than 3 transactions on a 2 minutes interval"})
 
     return denied_reasons
