@@ -3,9 +3,6 @@ from tests.payloads import *
 from services.TransactionValidator import *
 
 
-# TODO: Unit Tests
-
-
 class RuleTests(unittest.TestCase):
     def test_limit_rule_true(self):
         transaction_amount = 100
