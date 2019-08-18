@@ -7,7 +7,8 @@ def transaction_limit_rule(transaction_amount: float, account_limit: float):
 
 def transaction_limit90_rule(transaction_amount: float, account_limit: float):
     max_limit_percentage = 90
-    return max_limit_percentage <= transaction_amount < account_limit
+    trigger_limit = (account_limit * max_limit_percentage)/100
+    return trigger_limit <= transaction_amount < account_limit
 
 
 def transaction_merchant_rule(transaction_list: list, transaction_merchant: str):
