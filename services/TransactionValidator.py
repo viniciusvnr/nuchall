@@ -5,11 +5,14 @@ def transaction_limit_rule(transaction_amount: float, account_limit: float):
     return transaction_amount > account_limit
 
 
-def transaction_limit90_rule(transaction_amount: float, account_limit: float, max_limit_percentage: float):
-    return (account_limit * max_limit_percentage) <= transaction_amount < account_limit
+def transaction_limit90_rule(transaction_amount: float, account_limit: float):
+    max_limit_percentage = 90
+    return max_limit_percentage <= transaction_amount < account_limit
 
 
-def transaction_merchant_rule(transaction_list: list, max_transactions_per_merchant: int):
+def transaction_merchant_rule(transaction_list: list):
+    max_transactions_per_merchant = 10
+
     if transaction_list:
         count = 0
 
@@ -51,13 +54,11 @@ def validate_rules(input_obj):
     transaction_merchant = input_obj["transaction"]["merchant"]
     transaction_amount = input_obj["transaction"]["amount"]
     transaction_time = input_obj["transaction"]["time"]
-    max_limit_percentage = 0.9
-    max_transactions_per_merchant = 10
     denied_reasons = []
 
     # call functions
     limit_rule = transaction_limit_rule(transaction_amount, account_limit)
-    merchant_rule = transaction_merchant_rule(last_transactions, max_transactions_per_merchant)
+    merchant_rule = transaction_merchant_rule(last_transactions)
     deny_list_rule = transaction_deny_list_rule(transaction_merchant, deny_list)
 
     if limit_rule:
@@ -69,7 +70,7 @@ def validate_rules(input_obj):
         denied_reasons.append({"reason": "No transaction should be approved when the card is blocked"})
 
     if len(last_transactions) == 0:
-        limit_90_rule = transaction_limit90_rule(transaction_amount, account_limit, max_limit_percentage)
+        limit_90_rule = transaction_limit90_rule(transaction_amount, account_limit)
         if limit_90_rule:
             # rule 3.
             denied_reasons.append({"reason": "The first transaction shouldn't be above 90% of the limit"})
