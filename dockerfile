@@ -1,25 +1,22 @@
 FROM python:3.7-slim
 
-WORKDIR /app
 
-COPY requirements.txt ./requirements.txt
-COPY /app_config ./app_config
-COPY /controllers ./controllers
-COPY /schemas ./schemas
-COPY /services ./services
-COPY /tests ./tests
-COPY setup.py .
-COPY run.py .
+ADD requirements.txt /requirements.txt
+ADD setup.py /setup.py
+
+RUN set -ex \
+    && python3.7 -m venv /venv \
+    && /venv/bin/pip install -U pip \
+    && /venv/bin/pip install --no-cache-dir -r /requirements.txt
+
+WORKDIR /app
+COPY . /app
+
+RUN set -ex \
+    && python3.7 /setup.py install \
+    && python3.7 /app/tests/test_rules.py
 
 EXPOSE 5000
-RUN chmod +x ./setup.py
-RUN chmod +x ./tests/test_rules.py
 
-RUN pip3 install --no-cache-dir -r requirements.txt
-RUN python3 setup.py install
 
-RUN python3 ./tests/test_rules.py
-
-ENTRYPOINT [ "python3" ]
-
-CMD [ "run.py" ]
+CMD ["/venv/bin/python", "run.py"]
