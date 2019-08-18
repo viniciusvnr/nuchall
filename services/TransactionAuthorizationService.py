@@ -6,17 +6,15 @@ def authorize_transaction(authorization_request):
     val_rules = validate_rules(authorization_request)
     account_limit = authorization_request["account"]["limit"]
     transaction_amount = authorization_request["transaction"]["amount"]
-    account_new_limit = account_limit - transaction_amount
+    transactions_status = len(val_rules) == 0
 
-    if val_rules:
-        return {
-              "approved": False,
-              "newLimit": account_limit,
-              "deniedReasons": val_rules
-             }
+    if transactions_status:
+        account_new_limit = account_limit - transaction_amount
     else:
-        return {
-              "approved": True,
-              "newLimit": account_new_limit,
-              "deniedReasons": val_rules
-             }
+        account_new_limit = account_limit
+
+    return {
+          "approved": transactions_status,
+          "newLimit": account_new_limit,
+          "deniedReasons": val_rules
+         }

@@ -13,5 +13,5 @@ class Authorize(Resource):
         if input_object.errors:
             return input_object.errors, 400
         else:
-            make_authorization = authorize_transaction(input_object.data)
-            return make_authorization, 200
+            do_authorization = authorize_transaction(input_object.data)
+            return do_authorization, 200

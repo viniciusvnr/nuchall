@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"account\": {\n    \"cardIsActive\": true,\n    \"limit\": \"100\",\n    \"denylist\": [\"loja\", \"loja3\"]\n  },\n  \"latesttransactions\": [{\n\t\t\t\"merchant\": \"loja\",\n\t\t\t\"amount\": \"10\",\n\t\t\t\"time\": \"2019-08-17T11:01:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"25.7\",\n\t\t\t\"time\": \"2019-08-17T11:03:00.000000\"\n\t\t}],\n  \"transaction\": {\n    \"merchant\": \"loja1\",\n    \"amount\": \"80\",\n    \"time\": \"2019-08-17T11:03:00.000000\"\n  }\n}"
+					"raw": "{\n  \"account\": {\n    \"cardIsActive\": true,\n    \"limit\": \"100\",\n    \"denylist\": [\"loja\", \"loja3\"]\n  },\n  \"lasttransactions\": [],\n  \"transaction\": {\n    \"merchant\": \"loja1\",\n    \"amount\": \"80\",\n    \"time\": \"2019-08-17T11:03:00.000000\"\n  }\n}"
 				},
 				"url": {
 					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
@@ -52,7 +52,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [{\n\t\t\t\"merchant\": \"loja\",\n\t\t\t\"amount\": \"10\",\n\t\t\t\"time\": \"2019-08-17T11:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:02:05.000000\"\n\t\t},\n\t\t {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:02:10.000000\"\n\t\t},\n\t\t {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:08:00.000000\"\n\t\t}\n\t],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"80\",\n\t\t\t\"time\": \"2019-08-17T11:09:00.000000\"\n\t}\n}"
+					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [{\n\t\t\t\"merchant\": \"loja\",\n\t\t\t\"amount\": \"10\",\n\t\t\t\"time\": \"2019-08-17T11:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:02:05.000000\"\n\t\t},\n\t\t {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:05:10.000000\"\n\t\t},\n\t\t {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:08:00.000000\"\n\t\t}\n\t],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"120\",\n\t\t\t\"time\": \"2019-08-17T11:09:00.000000\"\n\t}\n}"
 				},
 				"url": {
 					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
@@ -188,7 +188,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja10\", \"loja3\"]\n\t},\n\t\"latesttransactions\": [],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"10\"\n\t}\n}"
+					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja10\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"10\",\n\t\t\"time\": \"2019-08-17T09:41:00.000000\"\n\t}\n}"
 				},
 				"url": {
 					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
@@ -251,7 +251,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/version",
+					"raw": "http://0.0.0.0:5000/api/v1.0",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -262,8 +262,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"v1.0",
-						"version"
+						"v1.0"
 					]
 				},
 				"description": ""
