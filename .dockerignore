@@ -1,0 +1,16 @@
+.git
+.ipynb_checkpoints/*
+/notebooks/*
+/unused/*
+Dockerfile
+.DS_Store
+.gitignore
+README.md
+env.*
+/venv/*
+/devops/*
+challenge.postman_collection.json
+/txt/*
+# To prevent storing dev/temporary container data
+*.csv
+/tmp/*
