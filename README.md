@@ -13,7 +13,7 @@ pip install -r requirements.txt
 - run application
 
 ```shell script
-python run.py
+python3 run.py
 ```
 
 ---

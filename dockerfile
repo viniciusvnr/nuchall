@@ -1,18 +1,19 @@
-FROM python:3
-
-EXPOSE 5000
+FROM python:3.7-slim
 
 WORKDIR /app
 
+COPY requirements.txt ./requirements.txt
 COPY /app_config ./app_config
 COPY /controllers ./controllers
 COPY /schemas ./schemas
 COPY /services ./services
 COPY run.py .
 COPY api_v1.py .
-COPY requirements.txt .
 
+EXPOSE 5000
 
-RUN pip install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-CMD [ "python", "run.py" ]
+ENTRYPOINT [ "python3" ]
+
+CMD [ "run.py" ]
