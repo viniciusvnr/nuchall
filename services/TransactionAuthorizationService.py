@@ -19,6 +19,6 @@ def authorize_transaction(authorization_request):
 
     return {
           "approved": transactions_status,
-          "newLimit": account_new_limit,
+          "newLimit": "{0:.2f}".format(account_new_limit),
           "deniedReasons": val_rules
          }
