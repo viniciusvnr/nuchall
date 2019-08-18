@@ -35,7 +35,6 @@ def transaction_limit_by_interval_rule(transaction_list: list, current_transacti
         # timestamp da transacao do payload
         dt2 = current_transaction_time.timestamp()
         # timestamp do proximo item da lista <latest_transactions>
-        idxtest = (i + 1) % len(transaction_list)
         dt2_inner = transaction_list[(i + 1) % len(transaction_list)]["time"].timestamp()
         dt_delta = dt2 - dt1
         dt_inner_delta = dt2_inner - dt1
