@@ -11,7 +11,7 @@ def transaction_limit90_rule(transaction_amount: float, account_limit: float):
     return trigger_limit <= transaction_amount < account_limit
 
 
-def transaction_merchant_rule(transaction_list: list, transaction_merchant: str):
+def transaction_same_merchant_rule(transaction_list: list, transaction_merchant: str):
     max_transactions_per_merchant = 10
     count = 0
 
@@ -59,7 +59,7 @@ def validate_rules(input_obj):
 
     # call functions
     limit_rule = transaction_limit_rule(transaction_amount, account_limit)
-    merchant_rule = transaction_merchant_rule(last_transactions, transaction_merchant)
+    same_merchant_rule = transaction_same_merchant_rule(last_transactions, transaction_merchant)
     deny_list_rule = transaction_deny_list_rule(transaction_merchant, deny_list)
 
     if limit_rule:
@@ -77,7 +77,7 @@ def validate_rules(input_obj):
             denied_reasons.append({"reason": "The first transaction shouldn't be above 90% of the limit"})
 
     if last_transactions:
-        if merchant_rule:
+        if same_merchant_rule:
             # rule 4.
             denied_reasons.append({"reason": "There should not be more than 10 transactions on the same merchant"})
 
