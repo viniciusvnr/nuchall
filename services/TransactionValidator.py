@@ -3,7 +3,6 @@
 def transaction_limit_rule(transaction):
     msg = "The transaction amount should not be above limit"
     status = transaction.amount > transaction.account_limit
-
     if status:
         return status, msg
     return status, None
