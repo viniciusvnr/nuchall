@@ -1,82 +1,77 @@
-from datetime import datetime
 
 
-def transaction_limit_rule(transaction_amount: float, account_limit: float):
-    return transaction_amount > account_limit
+def transaction_limit_rule(transaction):
+    return transaction.amount > transaction.account_limit
 
 
-def transaction_limit90_rule(transaction_amount: float, account_limit: float):
+def transaction_limit90_rule(transaction):
     max_limit_percentage = 90
-    trigger_limit = (account_limit * max_limit_percentage)/100
-    return trigger_limit <= transaction_amount < account_limit
+    trigger_limit = (transaction.account_limit * max_limit_percentage) / 100
+    return trigger_limit <= transaction.amount < transaction.account_limit
 
 
-def transaction_same_merchant_rule(transaction_list: list, transaction_merchant: str):
+def transaction_same_merchant_rule(transaction):
     max_transactions_per_merchant = 10
     count = 0
 
-    for trn in transaction_list:
-        if trn["merchant"] == transaction_merchant:
+    for trn in transaction.last_transactions:
+        if trn['merchant'] == transaction.merchant:
             count += 1
 
     return max_transactions_per_merchant <= count
 
 
-def transaction_deny_list_rule(transaction_merchant: str, deny_list: list):
-    return transaction_merchant in deny_list
+def transaction_deny_list_rule(transaction):
+    return transaction.merchant in transaction.deny_list
 
 
-def transaction_limit_by_interval_rule(transaction_list: list, transaction_time: datetime):
+def transaction_limit_by_interval_rule(transaction):
     interval_limit = 120
-    transaction_limit = 3
+    transaction_trigger_limit = 3
     count = 0
 
-    for i, trn in enumerate(transaction_list):
+    for i, trn in enumerate(transaction.last_transactions):
         # timestamp da transacao da lista <latest_transactions>
         dt1 = trn["time"].timestamp()
         # timestamp da transacao do payload
-        dt2 = transaction_time.timestamp()
+        dt2 = transaction.time.timestamp()
         # timestamp do proximo item da lista <latest_transactions>
-        dt2_inner = transaction_list[(i + 1) % len(transaction_list)]["time"].timestamp()
+        dt2_inner = transaction.last_transactions[
+            (i + 1) % len(transaction.last_transactions)]["time"].timestamp()
+
         dt_delta = dt2 - dt1
         dt_inner_delta = dt2_inner - dt1
 
         if dt_delta < interval_limit or dt_inner_delta < interval_limit:
             count += 1
 
-    return count >= transaction_limit
+    return count >= transaction_trigger_limit
 
 
-def validate_rules(input_obj):
-    card_is_active = input_obj["account"]["cardIsActive"]
-    account_limit = input_obj["account"]["limit"]
-    deny_list = input_obj["account"]["denylist"]
-    last_transactions = input_obj["lasttransactions"]
-    transaction_merchant = input_obj["transaction"]["merchant"]
-    transaction_amount = input_obj["transaction"]["amount"]
-    transaction_time = input_obj["transaction"]["time"]
+def validate_rules(transaction):
+
     denied_reasons = []
 
     # call functions
-    limit_rule = transaction_limit_rule(transaction_amount, account_limit)
-    same_merchant_rule = transaction_same_merchant_rule(last_transactions, transaction_merchant)
-    deny_list_rule = transaction_deny_list_rule(transaction_merchant, deny_list)
+    limit_rule = transaction_limit_rule(transaction)
+    same_merchant_rule = transaction_same_merchant_rule(transaction)
+    deny_list_rule = transaction_deny_list_rule(transaction)
 
     if limit_rule:
         # rule 1.
         denied_reasons.append({"reason": "The transaction amount should not be above limit"})
 
-    if not card_is_active:
+    if not transaction.card_is_active:
         # rule 2.
         denied_reasons.append({"reason": "No transaction should be approved when the card is blocked"})
 
-    if len(last_transactions) == 0:
-        limit_90_rule = transaction_limit90_rule(transaction_amount, account_limit)
+    if len(transaction.last_transactions) == 0:
+        limit_90_rule = transaction_limit90_rule(transaction)
         if limit_90_rule:
             # rule 3.
             denied_reasons.append({"reason": "The first transaction shouldn't be above 90% of the limit"})
 
-    if last_transactions:
+    if transaction.last_transactions:
         if same_merchant_rule:
             # rule 4.
             denied_reasons.append({"reason": "There should not be more than 10 transactions on the same merchant"})
@@ -85,8 +80,9 @@ def validate_rules(input_obj):
         # rule 5
         denied_reasons.append({"reason": "Merchant in deny list"})
 
-    if len(last_transactions) >= 3:
-        limit_by_interval_rule = transaction_limit_by_interval_rule(last_transactions, transaction_time)
+    if len(transaction.last_transactions) >= 3:
+
+        limit_by_interval_rule = transaction_limit_by_interval_rule(transaction)
 
         if limit_by_interval_rule:
             # rule 6

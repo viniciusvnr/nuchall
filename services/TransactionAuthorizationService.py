@@ -9,13 +9,17 @@ def calculate_new_limit(transactions_status, account_limit, transaction_amount):
     return account_limit
 
 
-def authorize_transaction(authorization_request):
+def authorize_transaction(transaction_object):
     # Call Rule validator
-    val_rules = validate_rules(authorization_request)
-    account_limit = authorization_request["account"]["limit"]
-    transaction_amount = authorization_request["transaction"]["amount"]
+    val_rules = validate_rules(transaction_object)
+
     transactions_status = len(val_rules) == 0
-    account_new_limit = calculate_new_limit(transactions_status, account_limit, transaction_amount)
+
+    account_new_limit = calculate_new_limit(
+        transactions_status,
+        transaction_object.account_limit,
+        transaction_object.amount
+        )
 
     return {
           "approved": transactions_status,
