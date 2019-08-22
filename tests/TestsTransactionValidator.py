@@ -120,7 +120,7 @@ class TestTransactionValidator(unittest.TestCase):
         self.assertTrue(result, 'Should be True')
         self.assertEqual(msg, "There should not be more than 3 transactions on a 2 minutes interval")
 
-    def test_when_more_than_two_transactions_in_two_minute_interval_should_be_false(self):
+    def test_when_more_than_two_transactions_in_two_minute_interval_should_return_false(self):
         # arrange
         transaction_object = TransactionHelper.data_list_generator(10, 2.5)
 
