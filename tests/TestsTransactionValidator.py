@@ -3,7 +3,7 @@ from .TransactionHelper import TransactionHelper
 from services.TransactionValidator import *
 
 
-class TestsTransactionValidator(unittest.TestCase):
+class TestTransactionValidator(unittest.TestCase):
 
     def test_rule_when_amount_is_greater_then_limit_should_return_true(self):
         # arrange
