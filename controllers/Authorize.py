@@ -3,9 +3,8 @@ from flask_restful import Resource
 from schemas.AuthorizeSchema import AuthorizeSchema
 from services.TransactionAuthorizationService import authorize_transaction
 
+
 # TODO: Logger
-
-
 class Transaction:
     def __init__(self, request_input):
         self.request_input = request_input

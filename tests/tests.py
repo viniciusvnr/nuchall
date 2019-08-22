@@ -185,6 +185,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_authorize_when_request_is_not_valid(self):
+
         payload = {
             "account": {
                 "cardIsActive": True,
