@@ -21,7 +21,6 @@ class Transaction:
 
 class Authorize(Resource):
     def post(self):
-
         schema = AuthorizeSchema()
         # Valida o schema
         input_object = schema.load(request.json)

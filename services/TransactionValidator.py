@@ -69,7 +69,7 @@ def transaction_limit_by_interval_rule(transaction):
             dt_delta = dt2 - dt1
             dt_inner_delta = dt2_inner - dt1
 
-            if dt_delta < interval_limit or dt_inner_delta < interval_limit:
+            if abs(dt_delta) < interval_limit or abs(dt_inner_delta) < interval_limit:
                 count += 1
 
     status = count >= transaction_trigger_limit

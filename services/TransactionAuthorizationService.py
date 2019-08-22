@@ -20,16 +20,16 @@ def authorize_transaction(transaction_object):
 
     # validate_rules returns:
     # status: Bool, denied_reasons: List
-    transactions_status, val_rules = validate_rules(transaction_object, rule_set)
+    is_transaction_approved, denied_reasons_list = validate_rules(transaction_object, rule_set)
 
     account_new_limit = calculate_new_limit(
-        transactions_status,
+        is_transaction_approved,
         transaction_object.account_limit,
         transaction_object.amount
         )
 
     return {
-          "approved": transactions_status,
+          "approved": is_transaction_approved,
           "newLimit": "{0:.2f}".format(account_new_limit),
-          "deniedReasons": val_rules
+          "deniedReasons": denied_reasons_list
          }
