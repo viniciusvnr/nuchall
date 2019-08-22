@@ -4,7 +4,6 @@ from schemas.AuthorizeSchema import AuthorizeSchema
 from services.TransactionAuthorizationService import authorize_transaction
 
 
-# TODO: Logger
 class Transaction:
     def __init__(self, request_input):
         self.request_input = request_input
@@ -24,6 +23,7 @@ class Authorize(Resource):
         # Valida o schema
         input_object = schema.load(request.json)
         if input_object.errors:
+            # TODO: Logar se houver erro de validacao de schema (info)
             return input_object.errors, 400
 
         transaction_object = Transaction(input_object.data)

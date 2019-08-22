@@ -78,6 +78,7 @@ def transaction_limit_by_interval_rule(transaction):
     return status, None
 
 
+# TODO: start de Logar validaão de regras (debug)
 def validate_rules(transaction, rule_set):
     denied_reasons = []
 
