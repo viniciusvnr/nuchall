@@ -111,7 +111,7 @@ class TestTransactionValidator(unittest.TestCase):
 
     def test_when_more_than_two_transactions_in_two_minute_interval_should_return_true(self):
         # arrange
-        transaction_object = TransactionHelper.data_list_generator(10, 0.5)
+        transaction_object = TransactionHelper.data_list_generator(10, 0.1)
 
         # act
         result, msg = transaction_limit_by_interval_rule(transaction_object)

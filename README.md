@@ -7,7 +7,7 @@
 - install requirements
 
 ```sh
-    python3 -m venv .venv \
+    python -m venv .venv \
     && .venv/bin/pip install -U pip \
     && .venv/bin/pip install --no-cache-dir -r requirements.txt
 ```
@@ -16,6 +16,12 @@
 
 ```sh
 source .venv/bin/activate
+```
+
+- Tests (inside project folder)
+
+```sh
+.venv/bin/python -m unittest tests
 ```
 
 - run application
@@ -150,3 +156,5 @@ GET /api/v1.0/healthcheck
 ```http
 status: 200 OK
 ```
+
+---
