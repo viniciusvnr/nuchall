@@ -14,7 +14,7 @@ COPY . /app
 
 RUN set -ex \
     && python3.7 /setup.py install \
-    && python3.7 /app/tests/test_rules.py
+    && python3.7 -m unittest /app/tests
 
 EXPOSE 5000
 
