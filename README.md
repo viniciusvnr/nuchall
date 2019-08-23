@@ -48,6 +48,12 @@ docker run -p 5000:5000 nuchall
 
 ---
 
+## Postman Collection
+
+To help the evaluation all requests involving the rules scenarios are inside the [Postman collection file.](challenge.postman_collection.json)
+
+---
+
 ## endpoint
 
 | HTTP Method | URI                   | Action                    |
