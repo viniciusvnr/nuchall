@@ -1,40 +1,27 @@
 {
+	"variables": [],
 	"info": {
 		"name": "challenge",
-		"_postman_id": "85cc309e-8712-4bc9-962a-bd3fe2dce4c9",
+		"_postman_id": "6fa5d801-a04b-4e77-14de-fad5c3cf581e",
 		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Authorize Transaction",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/authorize",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"account\": {\n    \"cardIsActive\": true,\n    \"limit\": \"100\",\n    \"denylist\": [\"loja\", \"loja3\"]\n  },\n  \"lasttransactions\": [],\n  \"transaction\": {\n    \"merchant\": \"loja1\",\n    \"amount\": \"80\",\n    \"time\": \"2019-08-17T11:03:00.000000\"\n  }\n}"
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"authorize"
-					]
 				},
 				"description": ""
 			},
@@ -43,32 +30,18 @@
 		{
 			"name": "Authorize Transaction (Regra1)",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/authorize",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [{\n\t\t\t\"merchant\": \"loja\",\n\t\t\t\"amount\": \"10\",\n\t\t\t\"time\": \"2019-08-17T11:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:02:05.000000\"\n\t\t},\n\t\t {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:05:10.000000\"\n\t\t},\n\t\t {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:08:00.000000\"\n\t\t}\n\t],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"120\",\n\t\t\t\"time\": \"2019-08-17T11:09:00.000000\"\n\t}\n}"
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"authorize"
-					]
 				},
 				"description": ""
 			},
@@ -77,32 +50,18 @@
 		{
 			"name": "Authorize Transaction (Regra2)",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/authorize",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": false,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [{\n\t\t\t\"merchant\": \"loja\",\n\t\t\t\"amount\": \"10\",\n\t\t\t\"time\": \"2019-08-17T05:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T06:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"25.7\",\n\t\t\t\"time\": \"2019-08-17T07:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"13.21\",\n\t\t\t\"time\": \"2019-08-17T08:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"7.6\",\n\t\t\t\"time\": \"2019-08-17T09:39:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"43\",\n\t\t\t\"time\": \"2019-08-17T09:45:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"100\",\n\t\t\t\"time\": \"2019-08-17T09:50:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"213.9\",\n\t\t\t\"time\": \"2019-08-17T10:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"17\",\n\t\t\t\"time\": \"2019-08-17T11:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"5.90\",\n\t\t\t\"time\": \"2019-08-17T12:02:00.000000\"\n\t\t}\n\t],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"90\",\n\t\t\t\"time\": \"2019-08-17T11:02:00.000000\"\n\t}\n}"
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"authorize"
-					]
 				},
 				"description": ""
 			},
@@ -111,32 +70,18 @@
 		{
 			"name": "Authorize Transaction (Regra3)",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/authorize",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"90\",\n\t\t\"time\": \"2019-08-17T09:45:00.000000\"\n\t}\n}"
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"authorize"
-					]
 				},
 				"description": ""
 			},
@@ -145,32 +90,18 @@
 		{
 			"name": "Authorize Transaction (Regra4)",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/authorize",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [{\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"10\",\n\t\t\"time\": \"2019-08-17T09:41:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\"time\": \"2019-08-17T09:45:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"25.7\",\n\t\t\"time\": \"2019-08-17T10:47:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"13.21\",\n\t\t\"time\": \"2019-08-17T11:48:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"7.6\",\n\t\t\"time\": \"2019-08-17T12:50:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"43\",\n\t\t\"time\": \"2019-08-17T13:52:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"100\",\n\t\t\"time\": \"2019-08-17T14:55:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"213.9\",\n\t\t\"time\": \"2019-08-17T15:55:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"17\",\n\t\t\"time\": \"2019-08-17T16:56:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"5.90\",\n\t\t\"time\": \"2019-08-17T16:59:00.000000\"\n\t\t}\n\t],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"90\",\n\t\t\"time\": \"2019-08-17T17:00:00.000000\"\n\t}\n}"
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"authorize"
-					]
 				},
 				"description": ""
 			},
@@ -179,32 +110,18 @@
 		{
 			"name": "Authorize Transaction (Regra5)",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/authorize",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"account\": {\n\t\t\"cardIsActive\": true,\n\t\t\"limit\": \"100\",\n\t\t\"denylist\": [\"loja10\", \"loja3\"]\n\t},\n\t\"lasttransactions\": [],\n\t\"transaction\": {\n\t\t\"merchant\": \"loja10\",\n\t\t\"amount\": \"10\",\n\t\t\"time\": \"2019-08-17T09:41:00.000000\"\n\t}\n}"
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"authorize"
-					]
 				},
 				"description": ""
 			},
@@ -213,32 +130,18 @@
 		{
 			"name": "Authorize Transaction (regra 6)",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/authorize",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"account\": {\n    \"cardIsActive\": true,\n    \"limit\": \"100\",\n    \"denylist\": [\"loja\", \"loja3\"]\n  },\n  \"lasttransactions\": [{\n\t\t\t\"merchant\": \"loja\",\n\t\t\t\"amount\": \"10\",\n\t\t\t\"time\": \"2019-08-17T11:01:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"20\",\n\t\t\t\"time\": \"2019-08-17T11:02:00.000000\"\n\t\t}, {\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"25.7\",\n\t\t\t\"time\": \"2019-08-17T11:03:00.000000\"\n\t\t},\n\t\t{\n\t\t\t\"merchant\": \"loja10\",\n\t\t\t\"amount\": \"25.7\",\n\t\t\t\"time\": \"2019-08-17T11:03:00.000000\"\n\t\t}],\n  \"transaction\": {\n    \"merchant\": \"loja1\",\n    \"amount\": \"80\",\n    \"time\": \"2019-08-17T11:04:00.000000\"\n  }\n}"
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/authorize",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"authorize"
-					]
 				},
 				"description": ""
 			},
@@ -247,24 +150,10 @@
 		{
 			"name": "Version",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0"
-					]
-				},
 				"description": ""
 			},
 			"response": []
@@ -272,50 +161,13 @@
 		{
 			"name": "Healthcheck",
 			"request": {
+				"url": "http://localhost:5000/api/v1.0/healthcheck",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/v1.0/healthcheck",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1.0",
-						"healthcheck"
-					]
-				},
 				"description": ""
 			},
 			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "4fe141fb-5659-4c12-b770-71bbfd27edcc",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "2e85d6db-556c-48de-bf23-2cf65660a7ed",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
 		}
 	]
 }
