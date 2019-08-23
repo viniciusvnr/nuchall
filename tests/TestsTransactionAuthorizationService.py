@@ -36,7 +36,7 @@ class TestTransactionAuthorizationService(unittest.TestCase):
         # assert
         self.assertEqual(result, 100)
 
-    def test_authorize_transaction_when_transaction_is_approved(self):
+    def test_authorize_transaction_when_transaction_approved_should_return_true(self):
         # arrange
         transaction_object = TransactionHelper.data_list_generator(0, 2)
         transaction_object.amount = 20
@@ -48,12 +48,13 @@ class TestTransactionAuthorizationService(unittest.TestCase):
         }
 
         # act
-        result = authorize_transaction(transaction_object)
+        with run.app.app_context():
+            result = authorize_transaction(transaction_object)
 
         # assert
         self.assertEqual(result, expected)
 
-    def test_authorize_transaction_when_transaction_is_not_approved(self):
+    def test_authorize_transaction_when_transaction_approved_should_return_false(self):
         # arrange
         transaction_object = TransactionHelper.data_list_generator(0, 2)
         transaction_object.amount = 100
@@ -65,12 +66,13 @@ class TestTransactionAuthorizationService(unittest.TestCase):
         }
 
         # act
-        result = authorize_transaction(transaction_object)
+        with run.app.app_context():
+            result = authorize_transaction(transaction_object)
 
         # assert
         self.assertEqual(result, expected)
 
-    def test_authorize_when_request_is_valid(self):
+    def test_authorize_when_request_should_return_valid_response(self):
         # arrange
         payload = {
             "account": {
@@ -98,7 +100,7 @@ class TestTransactionAuthorizationService(unittest.TestCase):
         self.assertEqual(res.json, expected)
         self.assertEqual(res.status_code, 200)
 
-    def test_authorize_when_request_is_not_valid(self):
+    def test_authorize_when_request_should_not_return_valid_response(self):
         # arrange
         payload = {
             "account": {

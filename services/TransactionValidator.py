@@ -1,3 +1,4 @@
+from flask import current_app
 
 
 def transaction_limit_rule(transaction):
@@ -78,7 +79,6 @@ def transaction_limit_by_interval_rule(transaction):
     return status, None
 
 
-# TODO: start de Logar validaão de regras (debug)
 def validate_rules(transaction, rule_set):
     denied_reasons = []
 
@@ -87,7 +87,15 @@ def validate_rules(transaction, rule_set):
         status, msg = r(transaction)
         if status and msg is not None:
             denied_reasons.append(msg)
+            current_app.logger.warning(
+                "[Transaction] merchant: {}, amount: {}, time: {}, Blocked by Rule {}".format(
+                    transaction.merchant, transaction.amount, transaction.time, r.__name__))
 
     is_transaction_approved = len(denied_reasons) == 0
+
+    if is_transaction_approved:
+        current_app.logger.info(
+            "[Transaction] merchant: {}, amount: {}, time: {}, Approved".format(
+                transaction.merchant, transaction.amount, transaction.time))
 
     return is_transaction_approved, denied_reasons

@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, current_app
 from flask_restful import Resource
 from schemas.AuthorizeSchema import AuthorizeSchema
 from services.TransactionAuthorizationService import authorize_transaction
@@ -23,9 +23,13 @@ class Authorize(Resource):
         # Valida o schema
         input_object = schema.load(request.json)
         if input_object.errors:
-            # TODO: Logar se houver erro de validacao de schema (info)
+            current_app.logger.warning(str(input_object.errors))
             return input_object.errors, 400
 
         transaction_object = Transaction(input_object.data)
-        do_authorization = authorize_transaction(transaction_object)
-        return do_authorization, 200
+        try:
+            do_authorization = authorize_transaction(transaction_object)
+        except Exception as e:
+            current_app.logger.info(str(e))
+        else:
+            return do_authorization, 200

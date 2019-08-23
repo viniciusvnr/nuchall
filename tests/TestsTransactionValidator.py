@@ -5,7 +5,7 @@ from services.TransactionValidator import *
 
 class TestTransactionValidator(unittest.TestCase):
 
-    def test_rule_when_amount_is_greater_then_limit_should_return_true(self):
+    def test_rule_when_amount_is_greater_than_limit_should_return_true(self):
         # arrange
         transaction_object = TransactionHelper.data_list_generator(0, 2)
         transaction_object.amount = 100
@@ -18,7 +18,7 @@ class TestTransactionValidator(unittest.TestCase):
         self.assertTrue(result, "should be True")
         self.assertEqual(msg, "The transaction amount should not be above limit")
 
-    def test_rule_when_account_amount_is_greater_then_transaction_amount_should_return_false(self):
+    def test_rule_when_account_amount_is_greater_than_transaction_amount_should_return_false(self):
         # arrange
         transaction_object = TransactionHelper.data_list_generator(0, 2)
         transaction_object.amount = 100
