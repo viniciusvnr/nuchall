@@ -21,13 +21,13 @@ source .venv/bin/activate
 - Tests (inside project folder)
 
 ```sh
-.venv/bin/python -m unittest tests
+./.venv/bin/python -m unittest tests
 ```
 
 - run application
 
 ```sh
-/venv/bin/python3 run.py
+./.venv/bin/python3 run.py
 ```
 
 ---
