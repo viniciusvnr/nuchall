@@ -2,19 +2,25 @@
 
 ## Setup
 
-### Local console
+### Local
 
 - install requirements
 
-```shell script
-    python3.7 -m venv /venv \
-    && /venv/bin/pip install -U pip \
-    && /venv/bin/pip install --no-cache-dir -r requirements.txt
+```sh
+    python3 -m venv .venv \
+    && .venv/bin/pip install -U pip \
+    && .venv/bin/pip install --no-cache-dir -r requirements.txt
+```
+
+- Activate Python Virtual Env
+
+```sh
+source .venv/bin/activate
 ```
 
 - run application
 
-```shell script
+```sh
 /venv/bin/python3 run.py
 ```
 
@@ -24,13 +30,13 @@
 
 - build image
 
-```shell script
+```sh
 docker build -t nuchall .
 ```
 
 - run container
 
-```shell script
+```sh
 docker run -p 5000:5000 nuchall
 ```
 
@@ -51,6 +57,8 @@ docker run -p 5000:5000 nuchall
 ```http
 POST /api/v1.0/authorize
 ```
+
+---
 
 ### `Payload`
 
@@ -83,7 +91,7 @@ POST /api/v1.0/authorize
   "newLimit": "Number",
   "deniedReasons": [
     {
-      "reason": "description of rule"
+      "string"
     }
   ]
 }
@@ -92,6 +100,22 @@ POST /api/v1.0/authorize
 ```http
 status: 201 CREATED
 ```
+
+### `Denied Reasons`
+
+```jsonc
+  "deniedReasons": [
+    {
+      "The transaction amount should not be above limit",
+      "No transaction should be approved when the card is blocked",
+      "The first transaction shouldn't be above 90% of the limit",
+      "There should not be more than 10 transactions on the same merchant",
+      "Merchant in deny list", // Rule 5
+      "There should not be more than 3 transactions on a 2 minutes interval"
+    }
+```
+
+---
 
 ## Api Version
 
@@ -109,6 +133,8 @@ GET /api/v1.0
 status: 200 OK
 ```
 
+---
+
 ## Healthcheck
 
 ```http
@@ -123,46 +149,4 @@ GET /api/v1.0/healthcheck
 
 ```http
 status: 200 OK
-```
-
----
-
-### default schema
-
-`account`
-
-```json
-{
-  "cardIsActive": true,
-  "limit": "Number",
-  "denylist": ["String"]
-}
-```
-
-`Transaction`
-
-```json
-{
-  "merchant": "String",
-  "amount": "Number",
-  "time": "String"
-}
-```
-
-`LastTransactions`
-
-```json
-{
-  "lasttransactions": ["String"]
-}
-```
-
-`Output`
-
-```json
-{
-  "approved": "Boolean",
-  "newLimit": "Number",
-  "deniedReasons": ["String"]
-}
 ```
