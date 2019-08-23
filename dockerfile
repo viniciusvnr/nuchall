@@ -13,8 +13,7 @@ WORKDIR /app
 COPY . /app
 
 RUN set -ex \
-    && python3.7 /setup.py install \
-    && python3.7 -m unittest /app/tests
+    && /venv/bin/python3.7 -m unittest tests
 
 EXPOSE 5000
 
