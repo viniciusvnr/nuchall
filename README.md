@@ -111,7 +111,7 @@ POST /api/v1.0/authorize
 ```
 
 ```http
-status: 201 CREATED
+status: 200 OK
 ```
 
 ### `Denied Reasons`
@@ -123,7 +123,7 @@ status: 201 CREATED
       "No transaction should be approved when the card is blocked",
       "The first transaction shouldn't be above 90% of the limit",
       "There should not be more than 10 transactions on the same merchant",
-      "Merchant in deny list", // Rule 5
+      "Merchant in deny list",
       "There should not be more than 3 transactions on a 2 minutes interval"
     }
 ```
