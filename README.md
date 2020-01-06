@@ -1,4 +1,10 @@
-# nuchall - Beta API - v1.0
+# Intro
+
+This project is an example of an API that authorizes a transaction for a specific account, following some
+predefined rules.
+
+
+## nuchall - Beta API - v1.0
 
 ## Setup
 
